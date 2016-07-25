@@ -9,7 +9,7 @@ class Room(models.Model):
     """
     model for a chat room
     """
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, default='Public')
     created_by = models.ForeignKey(User)
     active = models.BooleanField(_('Active'), default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created'))
