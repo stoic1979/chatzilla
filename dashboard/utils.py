@@ -1,6 +1,18 @@
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils import timezone
+from django.http import HttpResponse, HttpResponseRedirect
+
+from rest_framework.renderers import JSONRenderer
+
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
 
 
 def get_all_logged_in_users():

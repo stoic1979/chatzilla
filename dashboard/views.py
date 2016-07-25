@@ -10,16 +10,6 @@ from django.template import RequestContext
 from dashboard.utils import *
 
 
-class JSONResponse(HttpResponse):
-    """
-    An HttpResponse that renders its content into JSON.
-    """
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
-
-
 @login_required
 def home(request):
     data = {'users': get_all_logged_in_users()}
