@@ -27,6 +27,10 @@
             {% endif %}
             {% block body %}{% endblock %}
 
+            {% for user in users %}
+                {{ user }} <br>
+            {% endif %}
+
 
         </div><!-- end of div placeController -->
     </body>

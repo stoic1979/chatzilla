@@ -22,13 +22,7 @@ class JSONResponse(HttpResponse):
 
 @login_required
 def home(request):
-    data = {}
-
-    # quick test for showing all logged in users
-    resp = ""
-    for user in get_all_logged_in_users():
-        resp = "%s<br>%s" % (user, resp)
-
-    return HttpResponse(resp)
+    data = {'users': get_all_logged_in_users()}
+    return render_to_response('index.html', data, context_instance=RequestContext(request))
 
 
