@@ -9,6 +9,8 @@ from django.template import RequestContext
 
 from dashboard.forms import LoginForm
 
+from dashboard.utils import *
+
 class JSONResponse(HttpResponse):
     """
     An HttpResponse that renders its content into JSON.
@@ -22,7 +24,13 @@ class JSONResponse(HttpResponse):
 @login_required
 def home(request):
     data = {}
-    return HttpResponse("Ticketzilla")
+
+    # quick test for showing all logged in users
+    resp = ""
+    for user in get_all_logged_in_users():
+        resp = "%s<br>%s" % (user, resp)
+
+    return HttpResponse(resp)
 
 
 ################################################
