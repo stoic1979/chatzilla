@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Sqlite db from database settings of django
+db.sqlite3
