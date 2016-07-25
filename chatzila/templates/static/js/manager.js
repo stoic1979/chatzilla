@@ -10,7 +10,7 @@ angular
 .module("placeModule", [])
 .controller("placeController", function($scope, $http) {	
 
-	$scope.message = "Favorite Places";
+	$scope.message = "Chatzila Dashboard";
 
 	// some place objects
 	$scope.places = [];
