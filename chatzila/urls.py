@@ -6,6 +6,7 @@ admin.autodiscover()
 
 import dashboard.views as dashboard_views
 from dashboard import auth_helper
+from dashboard import api
 
 import reg.views as reg_views
 import settings
@@ -22,5 +23,9 @@ urlpatterns = [
 
     # registration
     url(r'^register/$', reg_views.regform, name='regform'),
+
+    # apis
+    url(r'^get_users/$', api.get_users, name='get_users'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
