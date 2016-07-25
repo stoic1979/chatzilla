@@ -6,7 +6,7 @@ from dashboard.models import Room, Message
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'url', 'username', 'email', 'is_staff')
+        fields = ('id', 'username', 'email', 'is_staff')
 
 
 class RoomSerializer(serializers.ModelSerializer):
