@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 import dashboard.views as dashboard_views
-import dashboard.auth_helper
+from dashboard import auth_helper
 
 import reg.views as reg_views
 import settings
