@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href={% static "css/msg.css" %}>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src={% static "js/msg.js" %}></script>
+        <script src={% static "js/manager.js" %}></script>
 
     </head>
     <body ng-app="chatModule" ng-controller="chatController">
@@ -61,7 +63,5 @@
                 </td>
             </tr>
         </table>
-        <script src={% static "js/msg.js" %}></script>
-        <script src={% static "js/manager.js" %}></script>
     </body>
 </html>
