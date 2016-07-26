@@ -1,6 +1,7 @@
 from dashboard.serializers import *
 from dashboard.utils import *
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 from django.contrib.auth.models import User
 
 from dashboard.models import Message
@@ -44,7 +45,7 @@ def get_user_messages(request):
 
         last_msg_id = request.POST.get('last_msg_id')
 
-        msgs = Message.objects.filter(sender=user)
+        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user))
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
