@@ -25,6 +25,32 @@ angular
                  });
         };
 
+        //----------------------------------------------------
+        // focus and select the current clicked user        
+        //----------------------------------------------------
+        $scope.focusUser = function(username){
+
+            alert("focusUser: " + username);
+
+            selectedUser = username;
+
+            // clear all messages from right side
+            $("#usersMessList tr").remove();
+
+            // show messages for selected user on right side
+            var msgLst = usersMessages[selectedUser];
+            if (! (selectedUser in usersMessages) ) return;
+            for(var i=0; i < msgLst.length; i++) {
+                var msg = msgLst[i];
+                createMessageGUI(msg.user, msg.ts, msg.msg);
+            }
+        };
+
+
+        $scope.testFunction = function (username) {
+            alert("testFunction: " + username);
+        };
+
 	// function to add new place
 	$scope.addTask = function() {
 		//$scope.places.push({ title: $scope.new_place, completed: false});
@@ -179,21 +205,3 @@ function moveScrollDown(div){
 }
 
 
-//////////////////////////////////////////////////////
-//                                                  //
-// focus and select the current clicked user        //
-//                                                  //
-//////////////////////////////////////////////////////
-function focusUser(){
-
-    // clear all messages from right side
-    $("#usersMessList tr").remove();
-
-    // show messages for selected user on right side
-    var msgLst = usersMessages[selectedUser];
-    if (! (selectedUser in usersMessages) ) return;
-    for(var i=0; i < msgLst.length; i++) {
-        var msg = msgLst[i];
-        createMessageGUI(msg.user, msg.ts, msg.msg);
-    }
-}
