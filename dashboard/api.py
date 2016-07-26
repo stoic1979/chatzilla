@@ -1,5 +1,7 @@
 from dashboard.serializers import *
 from dashboard.utils import *
+from django.views.decorators.csrf import csrf_exempt
+
 from dashboard.models import Message
 
 
@@ -10,6 +12,8 @@ def get_logged_users(request):
     serializer = UserSerializer(get_all_logged_in_users(), many=True)
     return JSONResponse(serializer.data)
 
+
+@csrf_exempt
 def send_message(request):
     """
     api to send message from one user to another
