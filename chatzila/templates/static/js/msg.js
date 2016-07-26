@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////
+//                                                  //
+//     GLOBAL DATA                                  //
+//                                                  //
+//////////////////////////////////////////////////////
 var scrollOffset = 100;
 var div = document.getElementById("msgListDiv");
 var scrollInit = false;		
