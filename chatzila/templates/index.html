@@ -1,16 +1,13 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>
-            IP Messenger
-        </title>
+        <title>Chatzilla</title>
 
         <link rel="stylesheet" type="text/css" href={% static "css/msg.css" %}>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     </head>
     <body>
-
 
         <div id="header" style="width:auto; height:85px; border-color:1px solid black;line-height:70px; background: linear-gradient(blue, navy );margin:-14px 0px 5px 1px;">
             {% if request and not request.user.is_anonymous %}
@@ -30,11 +27,11 @@
             <tr>
                 <td width=20% valign="top" style="background:#ffffff;">
                     <ul id="user-list" align="left">					
-                        <li >Jonathan </li>
-                        <li	>John </li>
-                        <li >David
-                            <li >Sreopwer</li>
-                            <li >Marry</li>								
+                        <li>Jonathan </li>
+                        <li>John </li>
+                        <li>David</li>
+                        <li >Sreopwer</li>
+                        <li >Marry</li>								
                     </ul>
                 </td>	
                 <td width=80%>
@@ -43,7 +40,7 @@
                             <td>
                                 <div id="msgListDiv" style="height:450px; overflow-y:auto;">
                                     <table id="usersMessList">								
-                                        <!table will all users messages>
+                                        <!-- table will all users messages -->
                                     </table>
                                 </div>
                             </td>						
@@ -66,7 +63,5 @@
             </tr>
         </table>
         <script src={% static "js/msg.js" %}></script>
-
-
     </body>
 </html>
