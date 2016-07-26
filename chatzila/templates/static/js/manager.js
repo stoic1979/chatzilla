@@ -1,10 +1,15 @@
 /*
 ------------------------------------------------------------------------------
-				PLACES MANAGER ANGULAR JS SCRIPT
+    CHAT MANAGER ANGULAR JS SCRIPT
 ------------------------------------------------------------------------------
 */
 
-// creating the module
+
+//////////////////////////////////////////////////////
+//                                                  //
+// CREATING AngularJS MODULE & CONTROLLER           //
+//                                                  //
+//////////////////////////////////////////////////////
 var myApp = 
 angular
 .module("chatModule", [])
@@ -16,9 +21,11 @@ angular
 	// some chat objects
 	$scope.users = [];
 
-        //----------------------------------------------------
-        // function to get all logged in users
-        //----------------------------------------------------
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // function to get all logged in users              //
+        //                                                  //
+        //////////////////////////////////////////////////////
         $scope.GetAllLoggedInUsers = function () {
              $http.get("/get_logged_users/")
                  .then(function(response){ 
@@ -26,10 +33,12 @@ angular
                  });
         };
 
-        //----------------------------------------------------
-        // initialization function for passing data
-        // via ng-init from template
-        //----------------------------------------------------
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // initialization function for passing data         //
+        // via ng-init from template                        //
+        //                                                  //
+        //////////////////////////////////////////////////////
         $scope.init = function (username, id) {
             $scope.myUsername = username;
             $scope.myUserId = id;
