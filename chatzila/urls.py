@@ -26,6 +26,7 @@ urlpatterns = [
 
     # apis
     url(r'^get_logged_users/$', api.get_logged_users, name='get_logged_users'),
+    url(r'^send_message/$', api.send_message, name='send_message'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
