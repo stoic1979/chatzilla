@@ -32,3 +32,20 @@ def send_message(request):
         return JSONResponse({'err': 0, 'msg_id': msg.id})
     except Exception as e:
         return JSONResponse({'err': 1, 'status': 'failed to send msg with exception: %s' % e})
+
+@csrf_exempt
+def get_user_messages(request):
+    """
+    api to get messages from given user
+    """
+    try:
+        username = request.POST.get('username')
+        user = User.objects.get(username=username)
+
+        last_msg_id = request.POST.get('last_msg_id')
+
+        msgs = Message.objects.filter(sender=user)
+        serializer = MessageSerializer(msgs, many=True)
+        return JSONResponse(serializer.data)
+    except Exception as e:
+        return JSONResponse({'err': 1, 'status': 'failed to get msgs with exception: %s' % e})
