@@ -9,7 +9,7 @@
         <script src={% static "js/manager.js" %}></script>
 
     </head>
-    <body>
+    <body ng-app="chatModule">
 
         <div id="header" style="width:auto; height:85px; border-color:1px solid black;line-height:70px; background: linear-gradient(blue, navy );margin:-14px 0px 5px 1px;">
             {% if request and not request.user.is_anonymous %}

@@ -7,39 +7,31 @@
 // creating the module
 var myApp = 
 angular
-.module("placeModule", [])
-.controller("placeController", function($scope, $http) {	
+.module("chatModule", [])
+.controller("chatController", function($scope, $http) {	
 
 	$scope.message = "Chatzila Dashboard";
 
-	// some place objects
-	$scope.places = [];
-	$scope.categories = [];
+	// some chat objects
+	$scope.users = [];
 
-        $scope.GetAllCategories = function () {
-             $http.get("/categories/")
+        //----------------------------------------------------
+        // function to get all logged in users
+        //----------------------------------------------------
+        $scope.GetAllLoggedInUsers = function () {
+             $http.get("/get_logged_users/")
                  .then(function(response){ 
-                     $scope.categories = response.data; 
-
-                     // get places for first category
-                     $scope.GetAllPlaces($scope.categories[0].id);
+                     $scope.users = response.data; 
                  });
         };
 
-        $scope.GetAllPlaces = function (pid) {
-             $http.get("/places/" + pid)
-                 .then(function(response){ 
-                     $scope.places = response.data; 
-                 });
-        };
-            
 	// function to add new place
 	$scope.addTask = function() {
 		//$scope.places.push({ title: $scope.new_place, completed: false});
 	}
 
-        // show categories on start
-        $scope.GetAllCategories();
+        // show users on start
+        $scope.GetAllLoggedInUsers();
 });
 
 myApp.config(function($interpolateProvider) {
