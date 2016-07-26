@@ -13,7 +13,10 @@
 
 
         <div id="header" style="width:auto; height:85px; border-color:1px solid black;line-height:70px; background: linear-gradient(blue, navy );margin:-14px 0px 5px 1px;">
-            <h4 style="color:#ffffff;float:left;margin:0px 0px 0px 10px;">Welcome : <span> Username</span></h4>
+            {% if request and not request.user.is_anonymous %}
+            <h4 style="color:#ffffff;float:left;margin:0px 0px 0px 10px;">Welcome : <span>{{ request.user }} </span></h4>
+            {% endif %}
+
             <a href="" style="float:right;margin:5px 50px 0px 0px;text-decoration: none; color: aliceblue" onclick="alert('Login');">Login</a>
             <h4 align="center" style="color:#ffffff;"> IP Messenger </h4>
 
