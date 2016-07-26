@@ -30,7 +30,7 @@ angular
         //----------------------------------------------------
         $scope.focusUser = function(username){
 
-            alert("focusUser: " + username);
+            console.log("focusUser: " + username);
 
             selectedUser = username;
 
@@ -51,11 +51,6 @@ angular
             alert("testFunction: " + username);
         };
 
-	// function to add new place
-	$scope.addTask = function() {
-		//$scope.places.push({ title: $scope.new_place, completed: false});
-	}
-
         // show users on start
         $scope.GetAllLoggedInUsers();
 });
@@ -71,7 +66,6 @@ myApp.config(function($interpolateProvider) {
 //                                                  //
 //////////////////////////////////////////////////////
 var scrollOffset = 100;
-var div = document.getElementById("msgListDiv");
 var scrollInit = false;		
 var selectedUser = "";
 
@@ -127,6 +121,7 @@ function getCurDateTime(){
 //                                                  //
 //////////////////////////////////////////////////////
 function initScroll(){
+    var div = document.getElementById("msgListDiv");
     if(!scrollInit){
         div.scrollTop += scrollOffset;				
     }	
