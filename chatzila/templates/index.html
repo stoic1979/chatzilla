@@ -17,8 +17,13 @@
             <h4 style="color:#ffffff;float:left;margin:0px 0px 0px 10px;">Welcome : <span>{{ request.user }} </span></h4>
             {% endif %}
 
-            <a href="" style="float:right;margin:5px 50px 0px 0px;text-decoration: none; color: aliceblue" onclick="alert('Login');">Login</a>
-            <h4 align="center" style="color:#ffffff;"> IP Messenger </h4>
+            {% if request and not request.user.is_anonymous %}
+            <a href="/logout/" style="float:right;margin:5px 50px 0px 0px;text-decoration: none; color: aliceblue">Logout</a>
+            {% else %}
+            <a href="/login/" style="float:right;margin:5px 50px 0px 0px;text-decoration: none; color: aliceblue">Login</a>
+            {% endif %}
+
+            <h4 align="center" style="color:#ffffff;"> ChatZilla - for endless chatting </h4>
 
         </div>	
         <table width=100% height=87% style="border:5px solid #181cc3;">
