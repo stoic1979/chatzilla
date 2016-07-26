@@ -45,7 +45,7 @@ def get_user_messages(request):
 
         last_msg_id = request.POST.get('last_msg_id')
 
-        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user))
+        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user), id__gt=last_msg_id)
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
