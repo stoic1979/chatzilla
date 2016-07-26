@@ -1,6 +1,7 @@
 from dashboard.serializers import *
 from dashboard.utils import *
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 from dashboard.models import Message
 
@@ -28,6 +29,6 @@ def send_message(request):
         content = request.POST.get('content')
         msg = Message(content=content, sender=senderUser, receiver=receiverUser)
         msg.save()
-        return JSONResponse({'err': 0, msg_id: msg.id})
-    except:
-        return JSONResponse({'err': 1, 'status': 'failed to send msg'})
+        return JSONResponse({'err': 0, 'msg_id': msg.id})
+    except Exception as e:
+        return JSONResponse({'err': 1, 'status': 'failed to send msg with exception: %s' % e})
