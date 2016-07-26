@@ -18,13 +18,16 @@ def send_message(request):
     """
     api to send message from one user to another
     """
-    sender = request.POST.get('sender')
-    senderUser = User.objects.get(username=sender)
+    try:
+        sender = request.POST.get('sender')
+        senderUser = User.objects.get(username=sender)
 
-    receiver = request.POST.get('receiver')
-    receiverUser = User.objects.get(username=receiver)
+        receiver = request.POST.get('receiver')
+        receiverUser = User.objects.get(username=receiver)
 
-    content = request.POST.get('content')
-    msg = Message(content=content, sender=senderUser, receiver=receiverUser)
-    msg.save()
-    return JSONResponse({'err': 0, msg_id: msg.id})
+        content = request.POST.get('content')
+        msg = Message(content=content, sender=senderUser, receiver=receiverUser)
+        msg.save()
+        return JSONResponse({'err': 0, msg_id: msg.id})
+    except:
+        return JSONResponse({'err': 1, 'status': 'failed to send msg'})
