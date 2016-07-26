@@ -25,7 +25,9 @@ class Message(models.Model):
     content = models.TextField()
     sender = models.ForeignKey(User, related_name='sender_id')
     receiver = models.ForeignKey(User, related_name='receiver_id')
-    room = models.ForeignKey(Room)
+
+    # FIXME add it later
+    #room = models.ForeignKey(Room)
     is_read = models.BooleanField(_('Read'), default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created'))
 
