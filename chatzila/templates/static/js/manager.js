@@ -184,8 +184,8 @@ function createMessageGUI(user, ts, message){
 //                                                  //
 //////////////////////////////////////////////////////
 
-function sendMessage(message ){
-
+function sendMessage(){
+    var message = getMessage();
     var ts = getCurDateTime();
 
     var msg = new MessageData(selectedUser, ts, message);
