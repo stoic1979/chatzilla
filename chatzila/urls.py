@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^register/$', reg_views.regform, name='regform'),
 
     # apis
-    url(r'^get_users/$', api.get_users, name='get_users'),
+    url(r'^get_logged_users/$', api.get_logged_users, name='get_logged_users'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
