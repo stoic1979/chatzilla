@@ -170,7 +170,7 @@ function createMessageGUI(user, ts, message){
     if(selectedUser!=""){
         usr.innerHTML = '<p class="user">'+ user + '<span id=""> [ '+ ts +' ] </span> :</p>';
         mess.innerHTML =  '<div class="message" style="float:left;"> <p class="mess-body">'+ message +' </p></div>';
-        moveScrollDown(div);
+        moveScrollDown();
     }
     else{
         alert("Please select a user");
@@ -206,7 +206,8 @@ function sendMessage(){
 //                                                  //
 //////////////////////////////////////////////////////
 
-function moveScrollDown(div){		
+function moveScrollDown(){		
+    var div = document.getElementById("msgListDiv");
     div.scrollTop +=scrollOffset;
 }
 
