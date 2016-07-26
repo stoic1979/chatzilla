@@ -10,6 +10,7 @@ angular
 .module("chatModule", [])
 .controller("chatController", function($scope, $http) {	
 
+
 	$scope.message = "Chatzila Dashboard";
 
 	// some chat objects
@@ -23,6 +24,16 @@ angular
                  .then(function(response){ 
                      $scope.users = response.data; 
                  });
+        };
+
+        //----------------------------------------------------
+        // initialization function for passing data
+        // via ng-init from template
+        //----------------------------------------------------
+        $scope.init = function (username, id) {
+            $scope.myUsername = username;
+            $scope.myUserId = id;
+            console.log("You are logged in as: " + $scope.myUsername + " with id=" + id);
         };
 
         //----------------------------------------------------
