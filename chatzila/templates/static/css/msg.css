@@ -1,0 +1,79 @@
+
+.main{
+	height:auto;
+	width:auto;
+	border: 1px solid black;
+	background:green;
+}
+
+
+.msg-list{
+	background:#ffffff;
+}
+
+.msg-write-area{
+	background:#006699;
+}
+
+ul{
+	float:left;
+	list-style: none;
+	padding-left:1px;
+	height: 36px;
+	line-height: 37px;
+}
+
+ul > li {
+	width: 246px;
+	color:#ffffff;
+	background:#85a3e0;
+	margin:5px 0px 5px 5px;
+	text-align:center;
+		
+}
+ul > li:hover {
+	border:1px solid #000000;
+}
+
+.focus-user{
+	background:#2952a3;
+}
+.message{
+    width: auto;
+    height: auto;
+    background: #e6ffff none repeat scroll 0% 0%;
+    border: 1px solid #CEC6C6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14;
+	border-radius: 10px;
+	margin:10px 30px 10px 20px;	
+	font-style: italic;	
+}
+
+.user{
+	color:#2952a3;
+	text-align:left;
+	font-size: 14;
+	margin-left:20px;	
+}
+.mess-body{
+	padding:5px 5px 1px 5px;
+}
+.rows { 
+	width: 880px;
+}
+.cols{
+    height: 83px;
+}
+body{
+	 font-family: Arial, Helvetica, sans-serif;
+	background:#ccdae0;
+}
+
+.send-button{
+	width: 100px; 
+	height: 80px;
+	color: rgb(243, 255, 244);
+	background: linear-gradient(#7272d2, rgba(17, 27, 160, 0.32));
+}
+
