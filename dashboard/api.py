@@ -49,4 +49,5 @@ def get_user_messages(request):
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
+        print "get_user_messages exp :: %s" %e
         return JSONResponse({'err': 1, 'status': 'failed to get msgs with exception: %s' % e})

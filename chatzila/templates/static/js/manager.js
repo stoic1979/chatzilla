@@ -20,6 +20,7 @@ angular
 
 	// some chat objects
 	$scope.users = [];
+	$scope.messages = [];
 
         //////////////////////////////////////////////////////
         //                                                  //
@@ -31,6 +32,28 @@ angular
                  .then(function(response){ 
                      $scope.users = response.data; 
                  });
+        };
+
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // Function To Get All Messages For This User       //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        $scope.GetAllMessages = function () {
+            $http({
+                method: 'POST',
+                url: '/get_user_messages/',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: {username: 'admin', last_msg_id: 0}
+            }).success(function (response) {
+                $scope.messages= response.data; 
+            });
         };
 
         //////////////////////////////////////////////////////
@@ -74,6 +97,8 @@ angular
         //                                                  //
         //////////////////////////////////////////////////////
         setInterval($scope.GetAllLoggedInUsers, 5000);
+
+        $scope.GetAllMessages();
 });
 
 myApp.config(function($interpolateProvider) {
