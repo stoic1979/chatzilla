@@ -132,12 +132,34 @@ angular
 
         //////////////////////////////////////////////////////
         //                                                  //
+        // Function For Adding Message To Message List      //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        $scope.sendMessage = function(){
+            var message = getMessage();
+            var ts = getCurDateTime();
+
+            var msg = new MessageData(selectedUser, ts, message);
+            if(selectedUser in usersMessages) {
+                var msgLst = usersMessages[selectedUser];
+                msgLst.push(msg);		
+            } else { // first time
+                var msgLst = [];
+                msgLst.push(msg);
+                usersMessages[selectedUser] = msgLst;
+            }
+            createMessageGUI(selectedUser, ts, message);			
+        };
+
+        //////////////////////////////////////////////////////
+        //                                                  //
         //      Service To Refresh/Fetch Logged In Users    //
         //                                                  //
         //////////////////////////////////////////////////////
         setInterval($scope.GetAllLoggedInUsers, 3000);
 
         setInterval($scope.GetAllMessages, 5000);
+
 });
 
 myApp.config(function($interpolateProvider) {
@@ -253,27 +275,6 @@ function createMessageGUI(user, ts, message){
 }
 
 
-//////////////////////////////////////////////////////
-//                                                  //
-// function for adding message to message list      //
-//                                                  //
-//////////////////////////////////////////////////////
-
-function sendMessage(){
-    var message = getMessage();
-    var ts = getCurDateTime();
-
-    var msg = new MessageData(selectedUser, ts, message);
-    if(selectedUser in usersMessages) {
-        var msgLst = usersMessages[selectedUser];
-        msgLst.push(msg);		
-    } else { // first time
-        var msgLst = [];
-        msgLst.push(msg);
-        usersMessages[selectedUser] = msgLst;
-    }
-    createMessageGUI(selectedUser, ts, message);			
-}
 
 //////////////////////////////////////////////////////
 //                                                  //
