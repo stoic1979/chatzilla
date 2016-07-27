@@ -83,14 +83,23 @@ angular
                 var message = m.content;
                 var ts = m.created_at;
 
-                var msg = new MessageData(selectedUser, ts, message);
-                if(selectedUser in usersMessages) {
-                    var msgLst = usersMessages[selectedUser];
+                //-----------------------------------------------------
+                // NOTE:
+                // we are keeping list of messages by sender
+                // we sender is same as my username,
+                // then sender should be recevier
+                //-----------------------------------------------------
+                var sender = m.snd;
+                if(sender == $scope.myUsername) sender = m.rcv;
+
+                var msg = new MessageData(m.snd, ts, message);
+                if(sender in usersMessages) {
+                    var msgLst = usersMessages[sender];
                     msgLst.push(msg);		
                 } else { // first time
                     var msgLst = [];
                     msgLst.push(msg);
-                    usersMessages[selectedUser] = msgLst;
+                    usersMessages[sender] = msgLst;
                 }
                 console.log("lastMsgId: " + lastMsgId);
             }
