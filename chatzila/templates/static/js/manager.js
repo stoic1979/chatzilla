@@ -56,7 +56,7 @@ angular
                         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                data: {username: 'admin', last_msg_id: lastMsgId}
+                data: {username: $scope.myUsername, last_msg_id: lastMsgId}
             }).success(function (response) {
                 $scope.messages = response; 
                 $scope.processMessages($scope.messages);
@@ -71,6 +71,7 @@ angular
         $scope.processMessages = function(messages){
             for(var i=0; i<messages.length; i++) {
                 var m = messages[i];
+                lastMsgId = m.id;
                 console.log(m.snd + ": " + m.content);
                 console.log("Me: " + $scope.myUsername);
                 if(selectedUser == ""){
@@ -91,7 +92,7 @@ angular
                     msgLst.push(msg);
                     usersMessages[selectedUser] = msgLst;
                 }
-                lastMsgId = msg.id;
+                console.log("lastMsgId: " + lastMsgId);
             }
         };
 
@@ -149,6 +150,30 @@ angular
                 usersMessages[selectedUser] = msgLst;
             }
             createMessageGUI(selectedUser, ts, message);			
+
+            $scope.PostMessage($scope.myUsername, selectedUser, message);
+        };
+
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // Function POSTS A MESSAGE TO SERVER               //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        $scope.PostMessage = function (sender, receiver, message) {
+            $http({
+                method: 'POST',
+                url: '/send_message/',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: {sender: sender, receiver: receiver, content: message}
+            }).success(function (response) {
+                console.log("post message response: " + response);
+            });
         };
 
         //////////////////////////////////////////////////////
