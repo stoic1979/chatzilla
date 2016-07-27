@@ -15,5 +15,8 @@ class RoomSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    snd = serializers.ReadOnlyField(source='sender.username')
+    rcv = serializers.ReadOnlyField(source='receiver.username')
     class Meta:
         model = Message
+        fields = ('id', 'content', 'snd', 'rcv', 'is_read', 'created_at')
