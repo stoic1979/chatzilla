@@ -31,6 +31,12 @@ angular
              $http.get("/get_logged_users/")
                  .then(function(response){ 
                      $scope.users = response.data; 
+
+                     // if no user is selected, select the first one
+                     if(selectedUser == "" && $scope.users.length > 0){
+                         selectedUser = $scope.users[0].username;
+                         console.log("selected user: " + selectedUser);
+                     }
                  });
         };
 
@@ -50,10 +56,43 @@ angular
                         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                data: {username: 'admin', last_msg_id: 0}
+                data: {username: 'admin', last_msg_id: lastMsgId}
             }).success(function (response) {
-                $scope.messages= response.data; 
+                $scope.messages = response; 
+                $scope.processMessages($scope.messages);
             });
+        };
+
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // Function Processes All Incoming Messages         //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        $scope.processMessages = function(messages){
+            for(var i=0; i<messages.length; i++) {
+                var m = messages[i];
+                console.log(m.snd + ": " + m.content);
+                console.log("Me: " + $scope.myUsername);
+                if(selectedUser == ""){
+                    selectedUser = m.snd;
+                }
+                if(selectedUser == m.snd || selectedUser == m.rcv) {
+                    createMessageGUI(m.snd, m.created_at, m.content);			
+                }
+                var message = m.content;
+                var ts = m.created_at;
+
+                var msg = new MessageData(selectedUser, ts, message);
+                if(selectedUser in usersMessages) {
+                    var msgLst = usersMessages[selectedUser];
+                    msgLst.push(msg);		
+                } else { // first time
+                    var msgLst = [];
+                    msgLst.push(msg);
+                    usersMessages[selectedUser] = msgLst;
+                }
+                lastMsgId = msg.id;
+            }
         };
 
         //////////////////////////////////////////////////////
@@ -96,9 +135,9 @@ angular
         //      Service To Refresh/Fetch Logged In Users    //
         //                                                  //
         //////////////////////////////////////////////////////
-        setInterval($scope.GetAllLoggedInUsers, 5000);
+        setInterval($scope.GetAllLoggedInUsers, 3000);
 
-        $scope.GetAllMessages();
+        setInterval($scope.GetAllMessages, 5000);
 });
 
 myApp.config(function($interpolateProvider) {
