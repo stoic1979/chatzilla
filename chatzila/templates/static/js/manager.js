@@ -89,8 +89,9 @@ myApp.config(function($interpolateProvider) {
 //                                                  //
 //////////////////////////////////////////////////////
 var scrollOffset = 100;
-var scrollInit = false;		
+var scrollInit   = false;		
 var selectedUser = "";
+var lastMsgId    = 0;
 
 
 //dictionary for holding the all users messages
