@@ -29,7 +29,7 @@
             <tr>
                 <td width=20% valign="top" style="background:#ffffff;">
                     <ul id="user-list" align="left">					
-                        <li ng-repeat="user in users" ng-click="focusUser( [[ user.username ]])">
+                        <li ng-repeat="user in users" ng-click="focusUser( [[ user.username ]])" ng-show="user.username != myUsername">
                             [[ user.username ]]
                         </li>
                     </ul>
