@@ -149,7 +149,7 @@ angular
                 msgLst.push(msg);
                 usersMessages[selectedUser] = msgLst;
             }
-            createMessageGUI(selectedUser, ts, message);			
+            createMessageGUI($scope.myUsername, ts, message);			
 
             $scope.PostMessage($scope.myUsername, selectedUser, message);
         };
