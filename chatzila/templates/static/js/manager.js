@@ -37,6 +37,7 @@ angular
                          selectedUser = $scope.users[0].username;
                          console.log("selected user: " + selectedUser);
                      }
+
                  });
         };
 
@@ -45,10 +46,10 @@ angular
         // Function To Get All Messages For This User       //
         //                                                  //
         //////////////////////////////////////////////////////
-        $scope.GetAllMessages = function () {
+        $scope.GetAllMessagesOfUser = function () {
             $http({
                 method: 'POST',
-                url: '/get_user_messages/',
+                url: '/get_all_messages_of_user/',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 transformRequest: function(obj) {
                     var str = [];
@@ -60,6 +61,9 @@ angular
             }).success(function (response) {
                 $scope.messages = response; 
                 $scope.processMessages($scope.messages);
+
+                // start listening for all incoming msgs from live chats
+                setInterval($scope.GetReceivedMessagesOfUser, 5000);
             });
         };
 
@@ -103,6 +107,29 @@ angular
                 }
                 console.log("lastMsgId: " + lastMsgId);
             }
+        };
+
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // Function To Get Received Msgs For This User      //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        $scope.GetReceivedMessagesOfUser = function () {
+            $http({
+                method: 'POST',
+                url: '/get_received_messages_of_user/',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: {username: $scope.myUsername, last_msg_id: lastMsgId}
+            }).success(function (response) {
+                $scope.messages = response; 
+                $scope.processMessages($scope.messages);
+            });
         };
 
         //////////////////////////////////////////////////////
@@ -185,14 +212,15 @@ angular
             });
         };
 
+
         //////////////////////////////////////////////////////
         //                                                  //
         //      Service To Refresh/Fetch Logged In Users    //
         //                                                  //
         //////////////////////////////////////////////////////
         setInterval($scope.GetAllLoggedInUsers, 3000);
+        setTimeout($scope.GetAllMessagesOfUser, 5000);
 
-        setInterval($scope.GetAllMessages, 5000);
 
 });
 

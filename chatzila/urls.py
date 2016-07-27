@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^get_logged_users/$', api.get_logged_users, name='get_logged_users'),
     url(r'^send_message/$', api.send_message, name='send_message'),
     url(r'^get_user_messages/$', api.get_user_messages, name='get_user_messages'),
+    url(r'^get_all_messages_of_user/$', api.get_all_messages_of_user, name='get_all_messages_of_user'),
+    url(r'^get_received_messages_of_user/$', api.get_received_messages_of_user, name='get_received_messages_of_user'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

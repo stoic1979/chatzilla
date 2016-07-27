@@ -39,6 +39,7 @@ def get_user_messages(request):
     """
     api to get messages from given user
     """
+    #FIXME - not using this api at the moment !!!!
     try:
         username = request.POST.get('username')
         user = User.objects.get(username=username)
@@ -49,5 +50,40 @@ def get_user_messages(request):
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
-        print "get_user_messages exp :: %s" %e
+        return JSONResponse({'err': 1, 'status': 'failed to get msgs with exception: %s' % e})
+
+@csrf_exempt
+def get_all_messages_of_user(request):
+    """
+    api to get messages from given user
+    """
+    try:
+        username = request.POST.get('username')
+        print "username ===", username
+        user = User.objects.get(username=username)
+
+        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user))
+        serializer = MessageSerializer(msgs, many=True)
+        return JSONResponse(serializer.data)
+    except Exception as e:
+        print "get_all_messages_of_user exp :: %s" %e
+        return JSONResponse({'err': 1, 'status': 'failed to get msgs with exception: %s' % e})
+
+@csrf_exempt
+def get_received_messages_of_user(request):
+    """
+    api to get all messages received by given user
+    """
+    try:
+        username = request.POST.get('username')
+        print "username ++++", username
+        user = User.objects.get(username=username)
+
+        last_msg_id = request.POST.get('last_msg_id')
+
+        msgs = Message.objects.filter(receiver=user, id__gt=last_msg_id)
+        serializer = MessageSerializer(msgs, many=True)
+        return JSONResponse(serializer.data)
+    except Exception as e:
+        print "get_received_messages_of_user exp :: %s" %e
         return JSONResponse({'err': 1, 'status': 'failed to get msgs with exception: %s' % e})
