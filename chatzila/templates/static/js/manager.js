@@ -23,7 +23,7 @@ angular
 
         //////////////////////////////////////////////////////
         //                                                  //
-        // function to get all logged in users              //
+        // Function To Get All Logged In Users              //
         //                                                  //
         //////////////////////////////////////////////////////
         $scope.GetAllLoggedInUsers = function () {
@@ -35,8 +35,8 @@ angular
 
         //////////////////////////////////////////////////////
         //                                                  //
-        // initialization function for passing data         //
-        // via ng-init from template                        //
+        // Initialization Function For Passing Data         //
+        // Via ng-init From Template                        //
         //                                                  //
         //////////////////////////////////////////////////////
         $scope.init = function (username, id) {
@@ -45,9 +45,11 @@ angular
             console.log("You are logged in as: " + $scope.myUsername + " with id=" + id);
         };
 
-        //----------------------------------------------------
-        // focus and select the current clicked user        
-        //----------------------------------------------------
+        //////////////////////////////////////////////////////
+        //                                                  //
+        // Focus And Select The Current Clicked User        //
+        //                                                  //
+        //////////////////////////////////////////////////////
         $scope.focusUser = function(username){
 
             console.log("focusUser: " + username);
@@ -72,7 +74,7 @@ angular
 
         //////////////////////////////////////////////////////
         //                                                  //
-        //      Service to refresh/fetch logged in users    //
+        //      Service To Refresh/Fetch Logged In Users    //
         //                                                  //
         //////////////////////////////////////////////////////
         setInterval($scope.GetAllLoggedInUsers, 5000);
