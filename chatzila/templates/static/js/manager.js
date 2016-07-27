@@ -68,10 +68,6 @@ angular
             }
         };
 
-        $scope.testFunction = function (username) {
-            alert("testFunction: " + username);
-        };
-
         //////////////////////////////////////////////////////
         //                                                  //
         //      Service To Refresh/Fetch Logged In Users    //
