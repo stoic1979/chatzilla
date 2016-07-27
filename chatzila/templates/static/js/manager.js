@@ -13,7 +13,7 @@
 var myApp = 
 angular
 .module("chatModule", [])
-.controller("chatController", function($scope, $http) {	
+.controller("chatController", function($scope, $http, $interval) {	
 
 
 	$scope.message = "Chatzila Dashboard";
@@ -66,13 +66,16 @@ angular
             }
         };
 
-
         $scope.testFunction = function (username) {
             alert("testFunction: " + username);
         };
 
-        // show users on start
-        $scope.GetAllLoggedInUsers();
+        //////////////////////////////////////////////////////
+        //                                                  //
+        //      Service to refresh/fetch logged in users    //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        setInterval($scope.GetAllLoggedInUsers, 5000);
 });
 
 myApp.config(function($interpolateProvider) {
