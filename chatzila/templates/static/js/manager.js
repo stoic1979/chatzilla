@@ -32,11 +32,22 @@ angular
                  .then(function(response){ 
                      $scope.users = response.data; 
 
+                     //-------------------------------------------------------
+                     // Note:
+                     // we need to select some use on left side
+                     //
                      // if no user is selected, select the first one
+                     // which is not same as my username
+                     //-------------------------------------------------------
                      if(selectedUser == "" && $scope.users.length > 0){
-                         selectedUser = $scope.users[0].username;
-                         console.log("selected user: " + selectedUser);
-                     }
+                         for(var i=0; i< $scope.users.length; i++) {
+                             // dont make myself as selectedUser
+                             if($scope.users[i].username == $scope.myUsername) continue;
+                             selectedUser = $scope.users[i].username;
+                             console.log("GetAllLoggedInUsers :: selected user: " + selectedUser);
+                             break;
+                         }//for
+                     }//if
 
                  });
         };
@@ -78,9 +89,16 @@ angular
                 lastMsgId = m.id;
                 console.log(m.snd + ": " + m.content);
                 console.log("Me: " + $scope.myUsername);
+
+                //-----------------------------------------------------
+                // NOTE:
+                // when no user is selected, then select/focus the 
+                // first one in the list
+                //-----------------------------------------------------
                 if(selectedUser == ""){
-                    selectedUser = m.snd;
+                    focusUser(m.snd);
                 }
+
                 if(selectedUser == m.snd || selectedUser == m.rcv) {
                     createMessageGUI(m.snd, m.created_at, m.content);			
                 }
@@ -151,6 +169,16 @@ angular
         //////////////////////////////////////////////////////
         $scope.focusUser = function(username){
 
+            //--------------------------------------------------
+            // Note:
+            // we shoud not focus logged in user
+            // as this should never happen, logged
+            // in user will never be shown on left side
+            //--------------------------------------------------
+            if(username == $scope.myUsername) {
+                return;
+            }
+
             console.log("focusUser: " + username);
 
             selectedUser = username;
@@ -190,6 +218,7 @@ angular
             }
             createMessageGUI($scope.myUsername, ts, message);			
 
+            console.log("focusUser :: selectedUser=" + selectedUser);
             $scope.PostMessage($scope.myUsername, selectedUser, message);
         };
 
