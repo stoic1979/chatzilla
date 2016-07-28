@@ -340,6 +340,7 @@ function getMessage(){
     var message = document.getElementById("msg");
     var msgTxt = message.value;
     message.value = "";		
+    message.focus();
     return msgTxt;
 }
 
