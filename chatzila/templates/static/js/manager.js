@@ -177,7 +177,7 @@ angular
             var ts = getCurDateTime();
 
             // in this case, sender is the logged in user
-            var sender = myUsername;
+            var sender = $scope.myUsername;
             var msg = new MessageData(sender, ts, message);
 
             if(selectedUser in usersMessages) {
