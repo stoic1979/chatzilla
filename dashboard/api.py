@@ -46,7 +46,7 @@ def get_user_messages(request):
 
         last_msg_id = request.POST.get('last_msg_id')
 
-        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user), id__gt=last_msg_id)
+        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user), id__gt=last_msg_id).order_by('created_at')
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
@@ -62,7 +62,7 @@ def get_all_messages_of_user(request):
         print "username ===", username
         user = User.objects.get(username=username)
 
-        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user))
+        msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user)).order_by('created_at')
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
@@ -81,7 +81,7 @@ def get_received_messages_of_user(request):
 
         last_msg_id = request.POST.get('last_msg_id')
 
-        msgs = Message.objects.filter(receiver=user, id__gt=last_msg_id)
+        msgs = Message.objects.filter(receiver=user, id__gt=last_msg_id).order_by('created_at')
         serializer = MessageSerializer(msgs, many=True)
         return JSONResponse(serializer.data)
     except Exception as e:
