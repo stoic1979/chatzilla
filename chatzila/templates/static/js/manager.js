@@ -24,6 +24,19 @@ angular
 
         //////////////////////////////////////////////////////
         //                                                  //
+        // Function To Highlight Selected User              //
+        // This Function Is Called Whenever A <li> Is       //
+        // Created With ng-repeat                           //
+        //                                                  //
+        //////////////////////////////////////////////////////
+        $scope.navClass = function (username) {
+            if(selectedUser != "") {
+                $("#" + selectedUser).addClass('focus-user');	
+            }
+        };   
+
+        //////////////////////////////////////////////////////
+        //                                                  //
         // Function To Get All Logged In Users              //
         //                                                  //
         //////////////////////////////////////////////////////
@@ -43,12 +56,11 @@ angular
                          for(var i=0; i< $scope.users.length; i++) {
                              // dont make myself as selectedUser
                              if($scope.users[i].username == $scope.myUsername) continue;
-                             selectedUser = $scope.users[i].username;
+                             $scope.focusUser($scope.users[i].username);
                              console.log("GetAllLoggedInUsers :: selected user: " + selectedUser);
                              break;
                          }//for
                      }//if
-
                  });
         };
 
@@ -87,8 +99,8 @@ angular
             for(var i=0; i<messages.length; i++) {
                 var m = messages[i];
                 lastMsgId = m.id;
-                console.log(m.snd + ": " + m.content);
-                console.log("Me: " + $scope.myUsername);
+                //console.log(m.snd + ": " + m.content);
+                //console.log("Me: " + $scope.myUsername);
 
                 //-----------------------------------------------------
                 // NOTE:
@@ -123,7 +135,7 @@ angular
                     msgLst.push(msg);
                     usersMessages[sender] = msgLst;
                 }
-                console.log("lastMsgId: " + lastMsgId);
+                //console.log("lastMsgId: " + lastMsgId);
             }
         };
 
@@ -179,11 +191,20 @@ angular
                 return;
             }
 
-            console.log("focusUser: " + username);
+            //--------------------------------------------------
+            // HIGHLIGHT CODE
+            //--------------------------------------------------
+            // remove highlight from all 
+            $("ul div").removeClass('focus-user');	
+            // adding highlight to selected user
+            $("#" + username).addClass('focus-user');	
 
             selectedUser = username;
+            console.log("focusUser :: selectedUser " + selectedUser);
 
+            //--------------------------------------------------
             // clear all messages from right side
+            //--------------------------------------------------
             $("#usersMessList tr").remove();
 
             // show messages for selected user on right side
