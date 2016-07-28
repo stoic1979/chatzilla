@@ -176,7 +176,10 @@ angular
             var message = getMessage();
             var ts = getCurDateTime();
 
-            var msg = new MessageData(selectedUser, ts, message);
+            // in this case, sender is the logged in user
+            var sender = myUsername;
+            var msg = new MessageData(sender, ts, message);
+
             if(selectedUser in usersMessages) {
                 var msgLst = usersMessages[selectedUser];
                 msgLst.push(msg);		
