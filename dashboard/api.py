@@ -59,8 +59,15 @@ def get_all_messages_of_user(request):
     """
     try:
         username = request.POST.get('username')
-        print "username ===", username
         user = User.objects.get(username=username)
+
+        #########################################################################################
+        # Note:
+        # for descending order, use '-created_at' in order_by
+        # as showing in following statement
+        # msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user)).order_by('created_at')
+        #
+        #########################################################################################
 
         msgs = Message.objects.filter(Q(sender=user) | Q(receiver=user)).order_by('created_at')
         serializer = MessageSerializer(msgs, many=True)
@@ -76,7 +83,6 @@ def get_received_messages_of_user(request):
     """
     try:
         username = request.POST.get('username')
-        print "username ++++", username
         user = User.objects.get(username=username)
 
         last_msg_id = request.POST.get('last_msg_id')
